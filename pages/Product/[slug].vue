@@ -18,19 +18,21 @@ onMounted(fetchProduct);
 <template>
   <suspense>
     <template #default>
-      <SEOHead
-        :name="product.name"
-        :description="product.description"
-        :image="product.image"
-      />
-      <ProductDetails
-        :id="product.id"
-        :name="product.name"
-        :description="product.description"
-        :image="product.image"
-        :price="product.price"
-        :highlights="product.highlights"
-      />
+      <div v-if="product">
+        <SEOHead
+          :name="product.name"
+          :description="product.description"
+          :image="product.image"
+        />
+        <ProductDetails
+          :id="product.id"
+          :name="product.name"
+          :description="product.description"
+          :image="product.image"
+          :price="product.price"
+          :highlights="product.highlights"
+        />
+      </div>
     </template>
     <template #fallback>
       <ProductSkeletonDetails />
