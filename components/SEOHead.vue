@@ -3,7 +3,8 @@ import { useRoute } from "vue-router";
 import type { Product } from "~/types/products";
 
 const { path } = useRoute();
-const { name, description, image } = defineProps<Product>();
+
+const { name, description, image } = defineProps<Pick<Product, 'name' | 'description' | 'image'>>();
 
 const siteName = 'Wanderlust';
 
