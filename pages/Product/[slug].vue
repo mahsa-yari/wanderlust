@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
 import type { Product } from "~/types/products";
-import { useProduct } from "~/composables/useProduct.ts";
 
 const product = ref<Product | null>(null);
 const route = useRoute();

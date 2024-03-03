@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { Product } from "@/types/products";
 import { onMounted, ref } from "vue";
-import { useProducts } from "~/composables/useProducts";
 
 const products = ref<Product[]>([]);
 const isLoading = ref(true);
