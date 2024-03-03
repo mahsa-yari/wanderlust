@@ -47,10 +47,6 @@ const { id, name, price, image, description, highlights } =
 
         <button
           class="flex items-center rounded bg-[#ADB3CC] px-3 sm:px-10 py-2.5 text-xs text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg active:shadow-lg"
-          type="button"
-          id="button-addon1"
-          data-te-ripple-init
-          data-te-ripple-color="light"
         >
           Book Now
         </button>
