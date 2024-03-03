@@ -22,32 +22,30 @@ onMounted(fetchProducts);
 </script>
 
 <template>
-  <section>
+  <div
+    v-if="isLoading"
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-8 px-16"
+  >
+    <HomeProductListSkeletonItem v-for="item in 4" :key="item" />
+  </div>
+  <div v-else>
+    <div v-if="error" class="text-2xl text-center mt-10">
+      An error occurred while loading products.
+    </div>
     <div
-      v-if="isLoading"
+      v-else
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-8 px-16"
     >
-      <HomeProductListSkeletonItem v-for="item in 4" :key="item" />
+      <HomeProductListItem
+        v-for="product in products.slice(0, 4)"
+        :key="product.id"
+        :id="product.id"
+        :name="product.name"
+        :price="product.price"
+        :image="product.image"
+        :description="product.description"
+        :highlights="product.highlights"
+      />
     </div>
-    <div v-else>
-      <div v-if="error" class="text-2xl text-center mt-10">
-        An error occurred while loading products.
-      </div>
-      <div
-        v-else
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-8 px-16"
-      >
-        <HomeProductListItem
-          v-for="product in products.slice(0, 4)"
-          :key="product.id"
-          :id="product.id"
-          :name="product.name"
-          :price="product.price"
-          :image="product.image"
-          :description="product.description"
-          :highlights="product.highlights"
-        />
-      </div>
-    </div>
-  </section>
+  </div>
 </template>

@@ -16,23 +16,26 @@ onMounted(fetchProduct);
 </script>
 
 <template>
-  <div>
-    <div v-if="product">
-      <SEOHead
-        :name="product.name"
-        :description="product.description"
-        :image="product.image"
-      />
-      <ProductDetails
-        :id="product.id"
-        :name="product.name"
-        :description="product.description"
-        :image="product.image"
-        :price="product.price"
-        :highlights="product.highlights"
-      />
-    </div>
-
-    <ProductSkeletonDetails v-else />
-  </div>
+  <suspense>
+    <template #default>
+      <div v-if="product">
+        <SEOHead
+          :name="product.name"
+          :description="product.description"
+          :image="product.image"
+        />
+        <ProductDetails
+          :id="product.id"
+          :name="product.name"
+          :description="product.description"
+          :image="product.image"
+          :price="product.price"
+          :highlights="product.highlights"
+        />
+      </div>
+    </template>
+    <template #fallback>
+      <ProductSkeletonDetails />
+    </template>
+  </suspense>
 </template>
