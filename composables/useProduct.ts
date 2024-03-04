@@ -1,6 +1,6 @@
 import { ref, onMounted } from "vue";
-import { getArrayFromLocalStorage } from "~/utils"; // Adjust the import path as necessary
-import type { Product } from "~/types/products"; // Adjust the import path as necessary
+import { getArrayFromLocalStorage } from "~/utils";
+import type { Product } from "~/types/products";
 
 export const useProduct = (productId: number) => {
   const product = ref<Product | null>(null);
