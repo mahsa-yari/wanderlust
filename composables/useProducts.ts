@@ -1,14 +1,27 @@
+import { ref, onMounted } from "vue";
 import type { Product } from "@/types/products";
-import { get } from "~/utils";
-import { setArrayFromLocalStorage } from "~/utils";
+import { get, setArrayFromLocalStorage } from "~/utils";
 
-export async function useProducts(): Promise<Product[]> {
-  try {
-    const response = await get("/cities");
-    setArrayFromLocalStorage("products", response.slice(0, 4));
-    return response;
-  } catch (error) {
-    console.error("Error fetching cities:", error);
-    throw error;
-  }
+export const useProducts = () => {
+  const products = ref<Product[]>([]);
+ const error = ref<Error | null>(null);
+ const isLoading = ref(true);
+
+ const fetchProducts = async () => {
+    try {
+      isLoading.value = true;
+      const response = await get("/cities");
+      products.value = response;
+      setArrayFromLocalStorage("products", response.slice(0, 4));
+    } catch (err) {
+      console.error('Error fetching products:', err);
+      error.value = err;
+    } finally {
+      isLoading.value = false;
+    }
+ };
+
+ onMounted(fetchProducts);
+
+ return { products, error, isLoading };
 }
