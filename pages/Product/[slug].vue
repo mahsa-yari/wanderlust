@@ -8,32 +8,36 @@ const productId = route.params.slug;
 
 async function fetchProduct() {
   product.value = await useProduct(productId);
+  useHead({
+    title: product.value?.name,
+    meta: [
+      {
+        hid: "description",
+        name: "description",
+        content: product.value?.description,
+      },
+      {
+        name: "image",
+        hid: "image",
+        content: product.value?.image,
+      },
+    ],
+  });
 }
 
 onMounted(fetchProduct);
 </script>
 
 <template>
-  <suspense>
-    <template #default>
-      <div v-if="product">
-        <SEOHead
-          :name="product.name"
-          :description="product.description"
-          :image="product.image"
-        />
-        <ProductDetails
-          :id="product.id"
-          :name="product.name"
-          :description="product.description"
-          :image="product.image"
-          :price="product.price"
-          :highlights="product.highlights"
-        />
-      </div>
-    </template>
-    <template #fallback>
-      <ProductSkeletonDetails />
-    </template>
-  </suspense>
+  <div v-if="product">
+    <ProductDetails
+      :id="product.id"
+      :name="product.name"
+      :description="product.description"
+      :image="product.image"
+      :price="product.price"
+      :highlights="product.highlights"
+    />
+  </div>
+  <ProductSkeletonDetails v-else />
 </template>
