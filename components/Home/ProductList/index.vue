@@ -11,7 +11,7 @@ const { products, error, isLoading } = useProducts();
   </div>
   <div v-else-if="error">
     <p class="text-2xl text-center mt-10">
-      An error occurred while loading products.
+      {{ error }}
     </p>
   </div>
   <div v-else-if="!products">
